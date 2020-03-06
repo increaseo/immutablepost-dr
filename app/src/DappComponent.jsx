@@ -7,7 +7,7 @@ import MainPage from './components/pages/mainPage.component';
 import SecondaryPage from "./components/pages/secondaryPage.component";
 import AboutPage from "./components/pages/aboutPage.component";
 import ContactPage from "./components/pages/contactPage.component";
-
+import Footer from "./components/layouts/footer.component";
 const DappComponent = () => {
   return (
     <BrowserRouter>
@@ -19,7 +19,9 @@ const DappComponent = () => {
           <Route path='/about' component={AboutPage} />
           <Route path='/contact' component={ContactPage} />
         </Switch>
+        <Footer/>
       </div>
+      
     </BrowserRouter>
   )
 }
