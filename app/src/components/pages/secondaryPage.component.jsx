@@ -13,7 +13,7 @@ export default function SecondaryPage() {
     const stateApp = {
         storedTitle: 'Title',
         storedDescription: 'Description',
-        storedCategory: ''
+        storedCategory: 'Arts & Entertainment'
 
     };
 
@@ -38,7 +38,9 @@ export default function SecondaryPage() {
 
     const handleChange = (e, x) => {
         stateApp[e.target.id] = e.target.value;
+        
     }
+   
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,15 +48,23 @@ export default function SecondaryPage() {
 
     const saveStoredData = async () => {
 
+        //getting the fee from the contract
+        const thefee = await drizzle.contracts.ImmutablePosts.methods.getFee().call();
+        
+        //getting the wallet address to share the fee
+        const btSubmitElement = document.getElementById('submit-bt');
+        const storedWalletPlugin = btSubmitElement.getAttribute('data-sharewallet');
+
+        //posting the article to the blockchain
         const transaction = await drizzle.contracts.ImmutablePosts.methods
-            .createPostandPay(stateApp['storedTitle'],stateApp['storedDescription'],stateApp['storedCategory'])
-            .send({from: state.accounts[0]});
+            .createPostandPay(stateApp['storedTitle'],stateApp['storedDescription'],stateApp['storedCategory'],storedWalletPlugin)
+            .send({from: state.accounts[0], value: drizzle.web3.utils.toWei(thefee, "wei"), gas:3000000});
         
         if(transaction.status) {
             Swal.fire({
                 icon: 'success',
                 title: 'Success',
-                text: 'Stored Data updated!',
+                text: 'Your Post Has Been Made Immutable!',
                 type: 'success',
                 confirmButtonColor: '#e911bd',
             }).then(function() {
@@ -64,7 +74,7 @@ export default function SecondaryPage() {
             Swal.fire({
                 icon: 'error',
                 title: 'Opps!',
-                text: 'Error updating Stored Data!',
+                text: 'Error updating Post Data!',
                 type: 'error',
                 confirmButtonColor: '#e911bd',
             });
@@ -88,7 +98,7 @@ export default function SecondaryPage() {
                     </div>
                     <div className="form-group">
                         <label htmlFor="storedCategory">Category</label><br/>
-                        <select id="storeCategory">
+                        <select id="storedCategory" onChange={handleChange}>
                             <option value="Arts & Entertainment">Arts & Entertainment</option>
                             <option value="Business">Business</option>
                             <option value="Careers">Careers</option>
@@ -117,7 +127,7 @@ export default function SecondaryPage() {
                             <option value="Writing & Speaking">Writing & Speaking</option>
                         </select> 
                     </div>
-                    <button type="submit" className="btn btn-primary"onClick={saveStoredData}>Submit Post</button>
+                    <button type="submit" className="btn btn-primary" onClick={saveStoredData} id="submit-bt" data-sharewallet="0x99B51c553198c089E739FC4131dc98b42Bc391fa">Submit Post</button>
                 </form>
             </div>
         </div>
