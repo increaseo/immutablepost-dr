@@ -41,7 +41,7 @@ export default function MainPage() {
             strcat = strcat.replace(/\s+/g, '-').toLowerCase();
             var strtitle = postdata.title;
             strtitle = strtitle.replace(/\s+/g, '-').toLowerCase();
-            var url = encodeURI("/"+strcat+"/"+strtitle+"-"+j);
+            var url = encodeURI("post/"+strcat+"/"+strtitle+"/"+j);
             arrayallpostlist.push({'id':j,'purl':url, 'title':postdata.title, 'category':postdata.category}) ; 
             stateApp.list.push(postdata);
         

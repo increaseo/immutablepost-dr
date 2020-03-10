@@ -20,7 +20,7 @@ const DappComponent = () => {
           <Route path='/submit-your-post' component={SecondaryPage} />
           <Route path='/about' component={AboutPage} />
           <Route path='/contact' component={ContactPage} />
-          <Route path='/post/:id' component={ArticleDetails}/>
+          <Route path='/post/:category/:title/:id' component={ArticleDetails}/>
         </Switch>
         <Footer/>
       </div>
