@@ -8,10 +8,12 @@ export default function MainPage() {
     const { drizzle } = useDrizzle();
     const [balance, setBalance] = useState();
     const [nbposts, setnbposts] = useState(0);
-    const [posturl, setPosturl] = useState();
+    const [posturl, setPosturl] = useState([]);
     const state = useDrizzleState(state => state);
 
-
+    // state = {
+    //     person:null,
+    // }
 
     async function getBalance() {
         const balance = await drizzle.web3.eth.getBalance(state.accounts[0]);
@@ -25,7 +27,15 @@ export default function MainPage() {
         setnbposts(nbposts);
     }
 
+    const stateApp = {
+        list:[]
+
+    };
+       
+
     async function getAllPost() {
+
+       
 
         const nbposts = await drizzle.contracts.ImmutablePosts.methods.getNbArticles().call();
         const arrayallpostlist= [];
@@ -36,14 +46,19 @@ export default function MainPage() {
             var strtitle = postdata.title;
             strtitle = strtitle.replace(/\s+/g, '-').toLowerCase();
             var url = encodeURI("/"+strcat+"/"+strtitle+"-"+j);
-            arrayallpostlist.push(url+',');   
+            arrayallpostlist.push(url); 
+            stateApp.list.push(postdata);
             //allpostlist +="<li><h4><a href='#' data-url='"+url+"' class='pushlink'>"+postdata.title+"</a><small>("+postdata.category+")</small></h4><p>"+postdata.description+"</p></li>";
            // setPosturl(url);
-            //alert(arrayallpostlist);
+           
         }
-        setPosturl(arrayallpostlist);
+        console.log(stateApp.list);
+        //this.setState({list:stateApp['list']});
+        setPosturl(stateApp.list);
         
     }
+   
+  
 
     useEffect(() => {    
         getBalance();
@@ -57,18 +72,20 @@ export default function MainPage() {
                 <strong>Immutable Posts </strong>
             </h5>
             <div className="container">
-                <div class="ethamount">
+                <div className="ethamount">
                     You have in your account {balance} ETH.<br/><br/>
                 </div>
                 <h3>List of Immutable Posts ({nbposts})</h3>
-                <div class="">
-                {posturl}
-                {/* {posturl.map((url) => (
-                    <div>{url}</div>
-                ))} */}
-                    {/* <ul><li><a href="'{posturl}'">{posturl}</a></li></ul> */}
+                <div className=""></div>
+                <div>
+                    <ul>
+                   
+                    {posturl.map(result => (
+                        <li>{result.title}</li>
+                    ))}
+                   
+                    </ul>
                 </div>
-                
 
                 
 
