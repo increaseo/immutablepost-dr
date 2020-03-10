@@ -11,9 +11,6 @@ export default function MainPage() {
     const [posturl, setPosturl] = useState([]);
     const state = useDrizzleState(state => state);
 
-    // state = {
-    //     person:null,
-    // }
 
     async function getBalance() {
         const balance = await drizzle.web3.eth.getBalance(state.accounts[0]);
@@ -29,16 +26,15 @@ export default function MainPage() {
 
     const stateApp = {
         list:[]
-
     };
        
 
     async function getAllPost() {
 
-       
-
+    
         const nbposts = await drizzle.contracts.ImmutablePosts.methods.getNbArticles().call();
         const arrayallpostlist= [];
+
         for (var j=0; j <= nbposts-1; j++) {
             var postdata = await drizzle.contracts.ImmutablePosts.methods.getPostbyId(j).call();
             var strcat = postdata.category;
@@ -46,19 +42,16 @@ export default function MainPage() {
             var strtitle = postdata.title;
             strtitle = strtitle.replace(/\s+/g, '-').toLowerCase();
             var url = encodeURI("/"+strcat+"/"+strtitle+"-"+j);
-            arrayallpostlist.push(url); 
+            arrayallpostlist.push({'id':j,'purl':url, 'title':postdata.title, 'category':postdata.category}) ; 
             stateApp.list.push(postdata);
-            //allpostlist +="<li><h4><a href='#' data-url='"+url+"' class='pushlink'>"+postdata.title+"</a><small>("+postdata.category+")</small></h4><p>"+postdata.description+"</p></li>";
-           // setPosturl(url);
-           
-        }
-        console.log(stateApp.list);
-        //this.setState({list:stateApp['list']});
-        setPosturl(stateApp.list);
         
+        }
+        // console.log(arrayallpostlist);
+        // console.log(stateApp.list);
+       setPosturl(arrayallpostlist); 
     }
    
-  
+
 
     useEffect(() => {    
         getBalance();
@@ -76,20 +69,13 @@ export default function MainPage() {
                     You have in your account {balance} ETH.<br/><br/>
                 </div>
                 <h3>List of Immutable Posts ({nbposts})</h3>
-                <div className=""></div>
-                <div>
+                <div className="listofposts">
                     <ul>
-                   
-                    {posturl.map(result => (
-                        <li>{result.title}</li>
-                    ))}
-                   
+                        {posturl.map(result => (
+                            <li key={result.id}><a href={result.purl}>{result.title}</a> <small>({result.category})</small></li>
+                        ))}
                     </ul>
                 </div>
-
-                
-
-
 
             </div>
         </div>
