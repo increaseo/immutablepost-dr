@@ -43,8 +43,10 @@ export default function MainPage() {
             strtitle = strtitle.replace(/\s+/g, '-').toLowerCase();
             var url = encodeURI("post/"+strcat+"/"+strtitle+"/"+j);
             var postauthor = postdata.authorpost;
+            //console.log(postauthor);
             var postauthorid = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyAccount(postauthor).call();
-            var author = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyId(postauthorid).call();
+           // console.log(postauthorid);
+            var author = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyId(postauthorid[0]).call();
             
             arrayallpostlist.push({'id':j,'purl':url, 'title':postdata.title, 'category':postdata.category,'authorname':author.name}) ; 
             stateApp.list.push(postdata);

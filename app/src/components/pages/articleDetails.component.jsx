@@ -37,7 +37,7 @@ export default function ArticleDetails(props) {
         var postdata = await drizzle.contracts.ImmutablePosts.methods.getPostbyId(theid).call();
         var postauthor = postdata.authorpost;
         var postauthorid = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyAccount(postauthor).call();
-        var author = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyId(postauthorid).call();
+        var author = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyId(postauthorid[0]).call();
         arraypostdetail.push({'title':postdata.title, 'category':postdata.category, 'description':postdata.description,'authorname':author.name}) ;
         console.log(arraypostdetail);
         setPostDetail(arraypostdetail); 

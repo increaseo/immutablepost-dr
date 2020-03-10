@@ -6,6 +6,11 @@
 .rightaligned {
   float: right;
 }
+.hidden {
+  /* visibility: hidden;
+  height: 0; */
+  display: none;
+}
 .section {
   text-align: left;
   max-width: 720px;

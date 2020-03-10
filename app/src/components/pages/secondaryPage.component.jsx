@@ -11,7 +11,7 @@ export default function SecondaryPage() {
     const [thefee, setFee] = useState(0);
     const [showStep1, setShowStep1] = useState(true);
     const [showStep2, setShowStep2] = useState(false);
-    
+    //const [thetitle, keeptitle] = useState();
 
 
     const state = useDrizzleState(state => state);
@@ -61,6 +61,9 @@ export default function SecondaryPage() {
     const gotostep = (e) => {
         setShowStep2(!showStep2);
         setShowStep1(!showStep1);
+        //alert(stateApp['storedTitle']);
+        // const thetitle = stateApp['storedTitle'];
+        // keeptitle(thetitle);
     }
 
     const saveStoredData = async () => {
@@ -72,6 +75,14 @@ export default function SecondaryPage() {
         const btSubmitElement = document.getElementById('submit-bt');
         const storedWalletPlugin = btSubmitElement.getAttribute('data-sharewallet');
 
+        //Get again the Value of the first step
+        const storedTitle = document.getElementById("storedTitle").value;
+        stateApp['storedTitle'] = storedTitle;
+        const storedDescription = document.getElementById("storedDescription").value;
+        stateApp['storedDescription'] = storedDescription;
+        const storedCategory = document.getElementById("storedCategory").value;
+        stateApp['storedCategory'] = storedCategory;
+        //alert(stateApp['storedTitle']);
 
         //getting author information and adding author to the post
         const transactionauthor = await drizzle.contracts.ImmutablePosts.methods
@@ -113,8 +124,8 @@ export default function SecondaryPage() {
             <div className="container">
                 
                 <form onSubmit={handleSubmit}>
-                {showStep1 &&
-                    <div id="formsection-step1">  
+                
+                    <div id="formsection-step1" className={showStep1 ? "" : "hidden" }>  
                            {/* Post info  */}
                             <h4>Create your post</h4>
                             <div className="form-group">
@@ -162,45 +173,45 @@ export default function SecondaryPage() {
                             </div>
                             
                         </div>
-                         } 
-                        {showStep2 &&
-                        <div id="formsection-step2"> 
+                         
+                        {/* {showStep2 && } */}
+                        <div id="formsection-step2" className={showStep2 ? "" : "hidden" }> 
                           
                         {/* Author info  */}
                         <h4>A bit about yourself</h4>
                         <div className="form-group">
-                            <label htmlFor="storedTitle">Your name</label>
+                            <label htmlFor="storedName">Your name</label>
                             <input type="text" className="form-control" id="storedName" onChange={handleChange} placeholder="Name" required />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="storedTitle">Your bio</label>
+                            <label htmlFor="storedBio">Your bio</label>
                             <textarea className="form-control" id="storedBio" onChange={handleChange} placeholder="Bio"required/>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="storedTitle">Your website(link)</label>
+                            <label htmlFor="storedLink">Your website(link)</label>
                             <input type="text" className="form-control" id="storedLink" onChange={handleChange} placeholder="Link" />
                         </div>
                           <hr/>
                             {/* Invoice info  */}
                             {/* <h4>Information for billing/invoice</h4> */}
                             <div className="form-group">
-                                <label htmlFor="storedDescription">Company name</label>
+                                <label htmlFor="storedCompname">Company name</label>
                                 <input type="text" className="form-control" id="storedCompname" onChange={handleChange} placeholder="Company Name" required />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="storedDescription">Company address</label>
+                                <label htmlFor="storedCompaddress">Company address</label>
                                 <input type="text" className="form-control" id="storedCompaddress" onChange={handleChange} placeholder="Company Address" required />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="storedDescription">Company contact name</label>
+                                <label htmlFor="storedCompcontactname">Company contact name</label>
                                 <input type="text" className="form-control" id="storedCompcontactname" onChange={handleChange} placeholder="Company Contact Name" required />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="storedDescription">Company phone</label>
+                                <label htmlFor="storedCompphone">Company phone</label>
                                 <input type="tel" className="form-control" id="storedCompphone" onChange={handleChange} placeholder="Company Phone" required />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="storedDescription">Company email</label>
+                                <label htmlFor="storedCompemail">Company email</label>
                                 <input type="email" className="form-control" id="storedCompemail" onChange={handleChange} placeholder="Company Email" required />
                             </div>
                             <hr/>
@@ -210,7 +221,7 @@ export default function SecondaryPage() {
                             </div>
                            
                         </div>
-                        }
+                        
                 </form>
             </div>
         </div>
