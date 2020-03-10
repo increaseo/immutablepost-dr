@@ -35,7 +35,10 @@ export default function ArticleDetails(props) {
         const theid = props.match.params.id;
         const arraypostdetail= [];
         var postdata = await drizzle.contracts.ImmutablePosts.methods.getPostbyId(theid).call();
-        arraypostdetail.push({'title':postdata.title, 'category':postdata.category, 'description':postdata.description}) ;
+        var postauthor = postdata.authorpost;
+        var postauthorid = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyAccount(postauthor).call();
+        var author = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyId(postauthorid).call();
+        arraypostdetail.push({'title':postdata.title, 'category':postdata.category, 'description':postdata.description,'authorname':author.name}) ;
         console.log(arraypostdetail);
         setPostDetail(arraypostdetail); 
     }
@@ -55,7 +58,7 @@ export default function ArticleDetails(props) {
             <div className="container">
                 <div className="catgory-title"><small>From: </small>
                 {postdetail.map(result => (
-                    <small key={props.match.params.id}>{result.category}</small>
+                    <small key={props.match.params.id}>{result.category} by {result.authorname}</small>
                 ))}
                 </div>
                 <div className="article-details">

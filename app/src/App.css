@@ -3,7 +3,9 @@
   margin: 2rem;
   font-family: 'Oswald';
 }
-
+.rightaligned {
+  float: right;
+}
 .section {
   text-align: left;
   max-width: 720px;

@@ -42,11 +42,15 @@ export default function MainPage() {
             var strtitle = postdata.title;
             strtitle = strtitle.replace(/\s+/g, '-').toLowerCase();
             var url = encodeURI("post/"+strcat+"/"+strtitle+"/"+j);
-            arrayallpostlist.push({'id':j,'purl':url, 'title':postdata.title, 'category':postdata.category}) ; 
+            var postauthor = postdata.authorpost;
+            var postauthorid = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyAccount(postauthor).call();
+            var author = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyId(postauthorid).call();
+            
+            arrayallpostlist.push({'id':j,'purl':url, 'title':postdata.title, 'category':postdata.category,'authorname':author.name}) ; 
             stateApp.list.push(postdata);
-        
+            
         }
-        // console.log(arrayallpostlist);
+         console.log(arrayallpostlist);
         // console.log(stateApp.list);
        setPosturl(arrayallpostlist); 
     }
