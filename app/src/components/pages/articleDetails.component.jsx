@@ -60,12 +60,12 @@ export default function ArticleDetails(props) {
                 </div>
                 <div className="article-details">
                     {postdetail.map(result => (
-                            <div key={props.match.params.id}><p>{result.description}</p></div>
+                            <div key={props.match.params.id}><div dangerouslySetInnerHTML={{__html: result.description}}></div></div>
                         ))}
                 </div>
             </div>
         </div>
-   
+  
    ) : (
     <div className="section">
         <h5 className="section-header info-color white-text text-center py-4">
