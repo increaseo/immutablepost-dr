@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { drizzleReactHooks } from "@drizzle/react-plugin"
+import ipfs from "../../ipfs.js"
 import Swal from 'sweetalert2'
 
 const { useDrizzle, useDrizzleState } = drizzleReactHooks;
@@ -8,6 +9,8 @@ export default function SecondaryPage() {
 
     const { drizzle } = useDrizzle();
     const [balance, setBalance] = useState();
+    const [buffer, setBuffer] = useState();
+    const [ipfsHash, setipfsHash] = useState();
     const [thefee, setFee] = useState(0);
     const [showStep1, setShowStep1] = useState(true);
     const [showStep2, setShowStep2] = useState(false);
@@ -23,6 +26,7 @@ export default function SecondaryPage() {
         storedName: '',
         storedBio: '',
         storedLink: '',
+        storedImage: '',
 
     };
 
@@ -49,9 +53,31 @@ export default function SecondaryPage() {
 
     const handleChange = (e, x) => {
         stateApp[e.target.id] = e.target.value;
-        
     }
-   
+    
+    const handleImage = (e,x) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        const reader = new window.FileReader();
+        reader.readAsArrayBuffer(file);
+        reader.onloadend = (e) => {
+            const buffer = Buffer(reader.result);
+            setBuffer(buffer);
+            console.log('buffer',buffer);
+        
+
+        //set on ipfs
+        ipfs.files.add(buffer, (error,result)=> {
+            if(error) {
+                console.error(error)
+                return
+            }
+            const ipfsHash = result[0].hash
+            setipfsHash(ipfsHash)
+            console.log(ipfsHash)
+        })
+      }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -82,8 +108,10 @@ export default function SecondaryPage() {
         stateApp['storedDescription'] = storedDescription;
         const storedCategory = document.getElementById("storedCategory").value;
         stateApp['storedCategory'] = storedCategory;
+        const storedImage = document.getElementById("storedImage").value;
+        stateApp['storedImage'] = storedImage;
         //alert(stateApp['storedTitle']);
-
+       
         //getting author information and adding author to the post
         const transactionauthor = await drizzle.contracts.ImmutablePosts.methods
             .createAuthor(stateApp['storedName'],stateApp['storedBio'],stateApp['storedLink'])
@@ -91,7 +119,7 @@ export default function SecondaryPage() {
 
         //posting the article to the blockchain
         const transaction = await drizzle.contracts.ImmutablePosts.methods
-            .createPostandPay(stateApp['storedTitle'],stateApp['storedDescription'],stateApp['storedCategory'],storedWalletPlugin)
+            .createPostandPay(stateApp['storedTitle'],stateApp['storedDescription'],stateApp['storedCategory'],storedWalletPlugin,ipfsHash)
             .send({from: state.accounts[0], value: drizzle.web3.utils.toWei(thefee, "wei"), gas:3000000});
         
         if(transaction.status && transactionauthor.status) {
@@ -169,7 +197,7 @@ export default function SecondaryPage() {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="storedDescription">Upload Feature Image</label>
-                                <input type="file" className="form-control" id="storedImage" onChange={handleChange} />
+                                <input type="file" className="form-control" id="storedImage" onChange={handleImage} />
                             </div>
                             <hr/>
                             <div className="nav-form">

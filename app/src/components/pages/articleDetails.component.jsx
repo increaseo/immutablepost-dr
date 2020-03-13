@@ -38,7 +38,7 @@ export default function ArticleDetails(props) {
         var postauthor = postdata.authorpost;
         var postauthorid = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyAccount(postauthor).call();
         var author = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyId(postauthorid[0]).call();
-        arraypostdetail.push({'title':postdata.title, 'category':postdata.category, 'description':postdata.description,'authorname':author.name}) ;
+        arraypostdetail.push({'title':postdata.title, 'category':postdata.category, 'description':postdata.description,'authorname':author.name, 'image':'https://ipfs.io/ipfs/'+postdata.ipfshash}) ;
         console.log(arraypostdetail);
         setPostDetail(arraypostdetail); 
     }
@@ -63,7 +63,7 @@ export default function ArticleDetails(props) {
                 </div>
                 <div className="article-details">
                     {postdetail.map(result => (
-                            <div key={props.match.params.id}><div dangerouslySetInnerHTML={{__html: result.description}}></div></div>
+                            <div key={props.match.params.id}><div className="imagepost"><img src={result.image}/></div><div dangerouslySetInnerHTML={{__html: result.description}}></div></div>
                         ))}
                 </div>
             </div>
