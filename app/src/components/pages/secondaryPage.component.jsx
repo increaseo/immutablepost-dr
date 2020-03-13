@@ -167,6 +167,10 @@ export default function SecondaryPage() {
                                     <option value="Writing & Speaking">Writing & Speaking</option>
                                 </select> 
                             </div>
+                            <div className="form-group">
+                                <label htmlFor="storedDescription">Upload Feature Image</label>
+                                <input type="file" className="form-control" id="storedImage" onChange={handleChange} />
+                            </div>
                             <hr/>
                             <div className="nav-form">
                                 <button className="btn btn-primary rightaligned" onClick={gotostep}>Next</button>

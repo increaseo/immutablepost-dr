@@ -14,6 +14,7 @@ contract ImmutablePosts is Ownable {
         string description;
         string category;
         address authorpost;
+        string ipfshash;
     }
 
     //Category 
@@ -101,9 +102,9 @@ contract ImmutablePosts is Ownable {
 
 
     //Create a new post
-    function createPostandPay(string memory _title, string memory _description, string memory _category, address payable _pluginbeneficiary) public payable{
+    function createPostandPay(string memory _title, string memory _description, string memory _category, address payable _pluginbeneficiary, string memory _ipfshash) public payable{
           require(msg.value == postFee);
-          uint id = posts.push(Post(_title,_description,_category, msg.sender)) - 1;
+          uint id = posts.push(Post(_title,_description,_category, msg.sender, _ipfshash)) - 1;
           postToOwner[id] = msg.sender;
           ownerToPost[msg.sender] = id;
           ownerPostCount[msg.sender]++;
@@ -168,9 +169,9 @@ contract ImmutablePosts is Ownable {
       }
 
      // Get Post by Id Array
-      function getPostbyId(uint pos) public view returns(string memory title, string memory description, string memory category, address authorpost){ 
+      function getPostbyId(uint pos) public view returns(string memory title, string memory description, string memory category, address authorpost, string memory ipfshash){ 
         Post storage postss = posts[pos];
-        return (postss.title, postss.description, postss.category, postss.authorpost);
+        return (postss.title, postss.description, postss.category, postss.authorpost, postss.ipfshash);
      } 
 
      // For Admin of the contract to control the fee
