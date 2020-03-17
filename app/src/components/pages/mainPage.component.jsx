@@ -3,6 +3,7 @@ import { drizzleReactHooks } from "@drizzle/react-plugin"
 
 const { useDrizzle, useDrizzleState } = drizzleReactHooks;
 
+
 export default function MainPage() {
 
     const { drizzle } = useDrizzle();
@@ -56,13 +57,14 @@ export default function MainPage() {
         // console.log(stateApp.list);
        setPosturl(arrayallpostlist); 
     }
-   
-
+    
+    
 
     useEffect(() => {    
         getBalance();
         getNbPost();
         getAllPost();
+
     }, []);
 
     return balance ? (
