@@ -1,8 +1,5 @@
 import React from "react"
-
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-
-
 
 
 import MainPage from './components/pages/mainPage.component';
@@ -10,7 +7,6 @@ import SecondaryPage from "./components/pages/secondaryPage.component";
 import AboutPage from "./components/pages/aboutPage.component";
 import ContactPage from "./components/pages/contactPage.component";
 import ArticleDetails from "./components/pages/articleDetails.component";
-
 
 
 const Routes = () => {
