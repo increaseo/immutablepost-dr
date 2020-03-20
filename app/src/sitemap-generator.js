@@ -6,61 +6,58 @@ require("babel-register")({
   presets: [es2015, presetReact]
 });
 //Import our routes
-
 const router = require("./routes").default;
-const getposts = require("./getposts").default;
 const Sitemap = require("react-router-sitemap").default;
+const posts = require("./getposts");
 
 
-// async function generateSitemap() {
-//   try {
+ async function generateSitemap(posts) {
+  try {
    
-//     const posts = await ImmutablePosts.methods.getNbArticles().call();
-//     let idMap = [];
+    //const posts = await drizzle.contracts.ImmutablePosts.methods.getNbArticles().call();
+    let idMap = [];
 
-//     for(var i = 0; i < posts.length; i++) {
-//       idMap.push({ id: posts[i].postId });
-//     }
+    for(var i = 0; i < posts.length; i++) {
+      idMap.push({ id: posts[i].postId });
+    }
 
-//     const paramsConfig = {
-//       "/post/:id": idMap
-//     };
+    const paramsConfig = {
+      "/post/:id": idMap
+    };
 
-//     return (
-//       new Sitemap(router)
-//           .applyParams(paramsConfig)
-//           .build("https://www.example.com")
-//           .save("../public/sitemap.xml")
-//     );
-//   } catch(e) {
-//     console.log(e);
-//   } 
-// }
-
-
-function generateSitemap() {
-  
-  
-    //const nbposts = await ImmutablePosts.methods.getNbArticles().call();
-    //setnbposts(nbposts);
-  
-  const pathsConfig = {
-    '/post/:category/:title/:id': [
-      { category: ['post-title-1'],title: ['post-title-1'],id: ['post-title-1'] },
-      { category: ['post-title-1'],title: ['post-title-1'],id: ['post-title-1'] },
-      { category: ['post-title-1'],title: ['post-title-1'],id: ['post-title-1'] },
- 
-     ]
-  };
-
-
-  return (
-  new Sitemap(router())
-  .applyParams(pathsConfig)
-  .build("https://www.immutablepost.com")
- //Save it wherever you want
-  .save("../public/sitemap.xml")
-  );
+    return (
+      new Sitemap(router)
+          .applyParams(paramsConfig)
+          .build("https://www.example.com")
+          .save("../public/sitemap.xml")
+    );
+  } catch(e) {
+    console.log(e);
+  } 
 }
+
+
+// function generateSitemap() {
+  
+  
+  
+//   const pathsConfig = {
+//     '/post/:category/:title/:id': [
+//       { category: ['post-title-1'],title: ['post-title-1'],id: ['post-title-1'] },
+//       { category: ['post-title-1'],title: ['post-title-1'],id: ['post-title-1'] },
+//       { category: ['post-title-1'],title: ['post-title-1'],id: ['post-title-1'] },
+ 
+//      ]
+//   };
+
+
+//   return (
+//   new Sitemap(router())
+//   .applyParams(pathsConfig)
+//   .build("https://www.immutablepost.com")
+//  //Save it wherever you want
+//   .save("../public/sitemap.xml")
+//   );
+// }
 
 generateSitemap();

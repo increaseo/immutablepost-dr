@@ -64,7 +64,7 @@ export default function MainPage() {
         getBalance();
         getNbPost();
         getAllPost();
-
+     
     }, []);
 
     return balance ? (
