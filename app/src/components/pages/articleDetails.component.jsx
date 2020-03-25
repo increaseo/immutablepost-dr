@@ -49,16 +49,19 @@ export default function ArticleDetails(props) {
     }, []);
 
     return balance ? (
-        <div className="section">
-              <h5 className="section-header info-color white-text text-center py-4">
+        <div>
+            <div className="front-landing-intro page">
+                <h5 className="section-header info-color white-text text-center py-4">
+                    {postdetail.map(result => (
+                        <strong key={props.match.params.id}>{result.title}</strong>
+                    ))}
+                </h5>
+            </div>
+              
+            <div className="container section">
+                <div className="catgory-title"><small>In</small>
                 {postdetail.map(result => (
-                    <strong key={props.match.params.id}>{result.title}</strong>
-                ))}
-             </h5>
-            <div className="container">
-                <div className="catgory-title"><small>From: </small>
-                {postdetail.map(result => (
-                    <small key={props.match.params.id}>{result.category} by {result.authorname}</small>
+                    <small key={props.match.params.id}>{result.category} From {result.authorname}</small>
                 ))}
                 </div>
                 <div className="article-details">

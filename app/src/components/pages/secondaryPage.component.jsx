@@ -144,12 +144,15 @@ export default function SecondaryPage() {
     }
 
     return balance ? (
-        <div className="section">
-            <h5 className="section-header info-color white-text text-center py-4">
-                <strong>Post your Immutable Article</strong><br/>
-                <small>Cost of the post: {thefee} ETH</small>
-            </h5>
-            <div className="container">
+        <div>
+            <div className="front-landing-intro page">
+                <h5 className="section-header info-color white-text text-center py-4">
+                    <strong>Post your Immutable Article</strong><br />
+                    <small>Cost of the post: {thefee} ETH</small>
+                </h5>
+            </div>
+           
+            <div className="container formsubmitpost">
                 
                 <form onSubmit={handleSubmit}>
                 
@@ -197,7 +200,7 @@ export default function SecondaryPage() {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="storedDescription">Upload Feature Image</label>
-                                <input type="file" className="form-control" id="storedImage" onChange={handleImage} />
+                            <input type="file" className="form-control-file" id="storedImage" onChange={handleImage} />
                             </div>
                             <hr/>
                             <div className="nav-form">

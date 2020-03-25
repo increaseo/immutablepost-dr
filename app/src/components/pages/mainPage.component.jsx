@@ -44,12 +44,13 @@ export default function MainPage() {
             strtitle = strtitle.replace(/\s+/g, '-').toLowerCase();
             var url = encodeURI("post/"+strcat+"/"+strtitle+"/"+j);
             var postauthor = postdata.authorpost;
+            var excerpt = postdata.description.substr(1, 50);
             //console.log(postauthor);
             var postauthorid = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyAccount(postauthor).call();
            // console.log(postauthorid);
             var author = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyId(postauthorid[0]).call();
             
-            arrayallpostlist.push({'id':j,'purl':url, 'title':postdata.title, 'category':postdata.category,'authorname':author.name}) ; 
+            arrayallpostlist.push({ 'id': j, 'purl': url, 'title': postdata.title, 'category': postdata.category, 'description': excerpt, 'authorname': author.name, 'image': 'https://ipfs.io/ipfs/' + postdata.ipfshash}) ; 
             stateApp.list.push(postdata);
             
         }
@@ -68,25 +69,29 @@ export default function MainPage() {
     }, []);
 
     return balance ? (
-        <div className="section">
-            <h5 className="section-header info-color white-text text-center py-4">
-                <strong>Immutable Posts </strong>
-            </h5>
-            <div className="container">
-                <div className="ethamount">
-                    You have in your account {balance} ETH.<br/><br/>
-                </div>
-                <h3>List of Immutable Posts ({nbposts})</h3>
+       <div class="front">
+        <div className="front-landing-intro">
+                <div className="container content-frontintro">
+                <h2 className="section-header info-color white-text py-4">
+                    <strong>Welcome to Immutable Posts </strong>
+                </h2>
+                <p>Typically, Lorem Ipsum text consists of a jumbled section of De finibus bonorum et malorum, a first century, philosophical text written by Cicero. Words are added, modified, or removed to make it nonsensical.</p>
+                <button className="btn btn-primary">Publish your post</button>
+            </div>
+        </div>
+        <div className="container list-posts">
+               <h3>List of Immutable Posts ({nbposts})</h3>
                 <div className="listofposts">
                     <ul>
                         {posturl.map(result => (
-                            <li key={result.id}><a href={result.purl}>{result.title}</a> <small>({result.category})</small></li>
+                            <li key={result.id}><div className="postcontent"><div className="contentposttext"><h2><a href={result.purl}>{result.title}</a></h2><small>({result.category})</small><p>{result.description}</p><div className="linkarticle"><a href={result.purl} className="linkmore">Read more</a></div></div><div className="imagepost"><img src={result.image} /></div></div></li>
                         ))}
                     </ul>
                 </div>
 
             </div>
-        </div>
+        
+        </div>  
     ) : (
         <div className="section">
             <h5 className="section-header info-color white-text text-center py-4">
