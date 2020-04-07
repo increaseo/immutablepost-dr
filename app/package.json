@@ -10,6 +10,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "bootstrap": "^4.4.1",
+    "ethereumjs-tx": "^2.1.2",
+    "express": "^4.17.1",
     "ipfs-api": "^26.1.2",
     "react": "^16.11.0",
     "react-bootstrap": "^1.0.0-beta.16",
@@ -17,7 +19,9 @@
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
-    "sweetalert2": "^9.8.2"
+    "sweetalert2": "^9.8.2",
+    "web3": "^1.2.6",
+    "write-file-p": "^1.0.7"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -12,6 +12,7 @@ import DappComponent from './DappComponent';
 const drizzle = new Drizzle(drizzleOptions);
 const { DrizzleProvider } = drizzleReactHooks;
 
+
 function App () {
     return (
       <DrizzleProvider drizzle={drizzle}>

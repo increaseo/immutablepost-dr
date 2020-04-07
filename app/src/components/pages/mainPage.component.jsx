@@ -11,8 +11,7 @@ export default function MainPage() {
     const [nbposts, setnbposts] = useState(0);
     const [posturl, setPosturl] = useState([]);
     const state = useDrizzleState(state => state);
-
-
+    
     async function getBalance() {
         const balance = await drizzle.web3.eth.getBalance(state.accounts[0]);
         const baleth = drizzle.web3.utils.fromWei(balance,'ether');
@@ -56,7 +55,9 @@ export default function MainPage() {
         }
          console.log(arrayallpostlist);
         // console.log(stateApp.list);
-       setPosturl(arrayallpostlist); 
+       setPosturl(arrayallpostlist);
+     
+
     }
     
     
