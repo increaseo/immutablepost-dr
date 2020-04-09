@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { drizzleReactHooks } from "@drizzle/react-plugin"
-
+import immutablePostLoading from '../../assets/loading.gif'
 const { useDrizzle, useDrizzleState } = drizzleReactHooks;
 
 
@@ -10,6 +10,7 @@ export default function MainPage() {
     const [balance, setBalance] = useState();
     const [nbposts, setnbposts] = useState(0);
     const [posturl, setPosturl] = useState([]);
+    const [showLoading, setshowLoading] = useState(true);
     const state = useDrizzleState(state => state);
     
     async function getBalance() {
@@ -23,12 +24,15 @@ export default function MainPage() {
         const nbposts = await drizzle.contracts.ImmutablePosts.methods.getNbArticles().call();
         setnbposts(nbposts);
     }
-
+  
     const stateApp = {
         list:[]
     };
        
-
+    const gotopublish = (e) => {
+        window.location.href = "/submit-your-post";
+    }
+   
     async function getAllPost() {
 
     
@@ -56,7 +60,7 @@ export default function MainPage() {
          console.log(arrayallpostlist);
         // console.log(stateApp.list);
        setPosturl(arrayallpostlist);
-     
+       setshowLoading(!showLoading);
 
     }
     
@@ -70,14 +74,14 @@ export default function MainPage() {
     }, []);
 
     return balance ? (
-       <div class="front">
+       <div className="front">
         <div className="front-landing-intro">
                 <div className="container content-frontintro">
                 <h2 className="section-header info-color white-text py-4">
                     <strong>Welcome to Immutable Posts </strong>
                 </h2>
                 <p>Typically, Lorem Ipsum text consists of a jumbled section of De finibus bonorum et malorum, a first century, philosophical text written by Cicero. Words are added, modified, or removed to make it nonsensical.</p>
-                <button className="btn btn-primary">Publish your post</button>
+                    <button className="btn btn-primary" onClick={gotopublish}>Publish your post</button>
             </div>
         </div>
         <div className="container list-posts">
@@ -88,6 +92,12 @@ export default function MainPage() {
                             <li key={result.id}><div className="postcontent"><div className="contentposttext"><h2><a href={result.purl}>{result.title}</a></h2><small>({result.category})</small><p>{result.description}</p><div className="linkarticle"><a href={result.purl} className="linkmore">Read more</a></div></div><div className="imagepost"><img src={result.image} /></div></div></li>
                         ))}
                     </ul>
+                    <div id="loaderpost" className={showLoading ? "" : "hidden"}>
+                        <main className="drizzle-loader-container">
+                            <img src={immutablePostLoading} alt="Drizzle Logo" style={{ height: '100px' }} />
+                            <div className="drizzle-loader-text">Loading...</div>
+                        </main>
+                    </div>
                 </div>
 
             </div>

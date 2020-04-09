@@ -2,7 +2,7 @@ import React from "react";
 import { drizzleReactHooks } from "@drizzle/react-plugin";
 import Lottie from 'react-lottie'
 import animationData from './assets/drizzleLogo.json'
-
+import immutablePostLoading from './assets/loading.gif'
 const { useDrizzleState } = drizzleReactHooks; 
 
 const defaultOptions = {
@@ -20,11 +20,7 @@ function LoadingContainer({children}) {
     if(drizzleStatus.initialized === false) {
         return (
             <main className="drizzle-loader-container">
-                <Lottie
-                    options={defaultOptions}
-                    height={'70%'}
-                    width={400}
-                />
+                <img src={immutablePostLoading} alt="Drizzle Logo" style={{ height: '100px' }} />
                 <div className="drizzle-loader-text">Loading...</div>
             </main>
         )

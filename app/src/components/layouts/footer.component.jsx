@@ -18,8 +18,8 @@ const Footer = () => {
                     <div className="copyright">Built on the blockchain by <a href="https://www.increaseo.com" target="_blank" rel="nofollow">Increaseo</a> - @copyright ImmutablePost 2020</div>
                 </div>
             </div>    
-
        </footer>
+        
     )
 }
 

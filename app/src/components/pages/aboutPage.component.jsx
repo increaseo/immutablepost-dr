@@ -13,7 +13,12 @@ export default function aboutPage() {
                     </h5>
                 </div>
                 <div className="container section">
-                    <p>Content for About Page</p>
+                    <p>immutable</p>
+                    <p>/ɪˈmjuːtəb(ə)l/</p>
+                    <p>adjective</p>
+                    <p>unchanging over time or unable to be changed.</p>
+                    <p>Immutable Post is built on the ethereum blockchain. Ethereum is an open source, public, blockchain-based distributed computing platform and operating system featuring smart contract (scripting) functionality. We've used this technology to allow you to write content onto the blockchain where it is stored immutably.</p>
+                    <p>Immutable Post is a project developed and managed by Increaseo, an Australian digital agency which provides services including blockchain development, web & app development, SEO and digital marketing services.</p>
                 </div>
             </div>
        

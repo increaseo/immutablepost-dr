@@ -11,6 +11,9 @@ h1, h2, h3, h4 {
     font-family: 'Bellota Text', cursive;
     font-weight: 700;
 }
+.cookieConsent {
+ font-family: 'Bellota Text', cursive !important;
+}
 .rightaligned {
   float: right;
 }
@@ -60,6 +63,8 @@ h1, h2, h3, h4 {
 
 .drizzle-loader-container {
   height: 100vh;
+  text-align: center;
+  padding-top: 40vh;
 }
 
 .drizzle-loader {
@@ -131,6 +136,7 @@ h1, h2, h3, h4 {
 }
 .imagepost {
   width:20%;
+  padding: 25px;
   display: inline-block;
     vertical-align: top;
   
@@ -195,6 +201,9 @@ footer {
 label {
   font-weight: 700;
 }
+label span, .errortext {
+  color: #FF0000;
+}
 .formsubmitpost {
   text-align: left;
       margin-top: 50px;
@@ -207,4 +216,8 @@ label {
 }
 .article-details .imagepost {
   margin-bottom: 20px;
+}
+.form-control-select {
+  width:100%;
+  display: block;
 }
