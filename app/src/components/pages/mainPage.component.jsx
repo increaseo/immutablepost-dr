@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { drizzleReactHooks } from "@drizzle/react-plugin"
-import immutablePostLoading from '../../assets/loading.gif'
+import { drizzleReactHooks } from "@drizzle/react-plugin";
+import immutablePostLoading from '../../assets/loading.gif';
 const { useDrizzle, useDrizzleState } = drizzleReactHooks;
 
 

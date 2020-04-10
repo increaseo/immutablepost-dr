@@ -13,12 +13,13 @@ require("babel-register")({
 const router = require("./routes").default;
 const Sitemap = require("react-router-sitemap").default;
 
-
-//web3js = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/159beab8ddc94e4fadf540f13abca684"));
-web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
+web3js = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/159beab8ddc94e4fadf540f13abca684"));
+//web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
 const contractjson = JSON.parse(fs.readFileSync('./contracts/ImmutablePosts.json', 'utf8'));
 var contractABI = contractjson.abi;
-var contractAddress = '0x21dC0D52D10D89619099631E60e22570b4283E62';
+//var contractAddress = '0x21dC0D52D10D89619099631E60e22570b4283E62';
+var contractAddress = '0x87d85F4e79cA07d5c4d9fA5b6D96f7efc2b0A3f0';
+
 //creating contract object
 const contract = new web3js.eth.Contract(contractABI, contractAddress);
 

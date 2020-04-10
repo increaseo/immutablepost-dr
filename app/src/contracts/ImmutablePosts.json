@@ -14509,6 +14509,123 @@
     "version": "0.5.12+commit.7709ece9.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+        },
+        "0x3c0bdd714683cfc68ce0a5a1ab63a2977cf6fe8f84be337ab2e070c04d249600": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "idauthor",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "bio",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "link",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "authoraddress",
+              "type": "address"
+            }
+          ],
+          "name": "newAuthor",
+          "type": "event",
+          "signature": "0x3c0bdd714683cfc68ce0a5a1ab63a2977cf6fe8f84be337ab2e070c04d249600"
+        },
+        "0x9b461456bf22c34b04b705590ce2218c33439e5062e403bd18054efe39a4a6fc": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "categoryname",
+              "type": "string"
+            }
+          ],
+          "name": "newCategory",
+          "type": "event",
+          "signature": "0x9b461456bf22c34b04b705590ce2218c33439e5062e403bd18054efe39a4a6fc"
+        },
+        "0xe11e7a2b84ce91d77d6e22703b19b4218d69af20d7a8418ba6d728b323dd1b1a": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "title",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "category",
+              "type": "string"
+            }
+          ],
+          "name": "newPost",
+          "type": "event",
+          "signature": "0xe11e7a2b84ce91d77d6e22703b19b4218d69af20d7a8418ba6d728b323dd1b1a"
+        }
+      },
+      "links": {},
+      "address": "0x87d85F4e79cA07d5c4d9fA5b6D96f7efc2b0A3f0",
+      "transactionHash": "0xf1589883116fd6759c6e7abbbb12d55b3708f993620fb7a24673d98a0c4455b0"
+    },
     "5777": {
       "events": {
         "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
@@ -14628,7 +14745,7 @@
     }
   },
   "schemaVersion": "3.0.20",
-  "updatedAt": "2020-03-13T13:42:25.118Z",
+  "updatedAt": "2020-04-10T11:37:11.424Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Seb @Increaseo on the concept idea of Troy @Increaseo",

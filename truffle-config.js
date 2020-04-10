@@ -10,9 +10,9 @@ module.exports = {
   // to customize your Truffle configuration!
   contracts_build_directory: path.join(__dirname, "app/src/contracts"),
   networks: {
-    develop: {
-      port: 7545
-    },
+    // develop: {
+    //   port: 7545
+    // },
     ropsten: {
       provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/159beab8ddc94e4fadf540f13abca684`),
       network_id: 3,       // Ropsten's id

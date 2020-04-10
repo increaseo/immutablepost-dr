@@ -1,6 +1,7 @@
 {
-  "name": "app",
+  "name": "immutablepost",
   "version": "0.1.0",
+  "homepage": "https://immutablepost.com/",
   "private": true,
   "dependencies": {
     "@drizzle/react-components": "^1.5.1",
