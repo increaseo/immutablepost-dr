@@ -7,6 +7,12 @@ import emailjs from 'emailjs-com';
 import ipfs from "../../ipfs.js"
 import Swal from 'sweetalert2'
 
+
+import Web3 from "web3";
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import Fortmatic from 'fortmatic';
+
 const { useDrizzle, useDrizzleState } = drizzleReactHooks;
 
 export default function SecondaryPage() {
@@ -27,6 +33,8 @@ export default function SecondaryPage() {
     const [nameErrorCompAd, setNameErrorCompAd] = useState(null);
     const [nameErrorCompEmail, setNameErrorCompEmail] = useState(null);
     const [nameErrorCompPhone, setNameErrorCompPhone] = useState(null);
+
+    const [web3provider, setWeb3] = useState();
     //const [thetitle, keeptitle] = useState();
 
 
@@ -48,11 +56,44 @@ export default function SecondaryPage() {
 
     };
 
-    async function getBalance() {
-        const balance = await drizzle.web3.eth.getBalance(state.accounts[0]);
-        const baleth = drizzle.web3.utils.fromWei(balance,'ether');
-       // const balance = await drizzle.contracts.ImmutablePosts.methods.get().call();
-        setBalance(baleth);
+    const providerOptions = {
+        walletconnect: {
+            package: WalletConnectProvider, // required
+            options: {
+                infuraId: "159beab8ddc94e4fadf540f13abca684" // required
+            }
+        },
+        fortmatic: {
+            package: Fortmatic, // required
+            options: {
+                key: "pk_test_BA2F29C8A4846EA4" // required
+            }
+        }
+    };
+    const web3Modal = new Web3Modal({
+        network: "ropsten", // optional
+        cacheProvider: true, // optional
+        providerOptions // required
+    });
+
+    async function loadConnector() {
+        //web3Modal.clearCachedProvider();
+        const provider = await web3Modal.connect();
+        if (provider) {
+            setWeb3(new Web3(provider))
+        }
+
+    }
+    const gotowallet = (e) => {
+        loadConnector();
+    }
+    async function checkProvider() {
+        //web3Modal.clearCachedProvider();
+        if (web3Modal.cachedProvider) {
+            const provider = await web3Modal.connect();
+            console.log(provider);
+            setWeb3(new Web3(provider))
+        }
     }
 
     async function getFee() {
@@ -63,7 +104,7 @@ export default function SecondaryPage() {
 
 
     useEffect(() => {    
-        getBalance();
+        checkProvider()
         getFee();
         
     }, []);
@@ -318,7 +359,7 @@ export default function SecondaryPage() {
 
     }
 
-    return balance ? (
+    return web3provider ? (
         <div>
             <div className="front-landing-intro page">
                 <h5 className="section-header info-color white-text text-center py-4">
@@ -453,10 +494,17 @@ export default function SecondaryPage() {
             </div>
         </div>
     ) : (
-        <div className="section">
-            <h5 className="section-header info-color white-text text-center py-4">
-                <strong>Loading...</strong>
-            </h5>
-        </div>
+            <div>
+                <div className="front-landing-intro page">
+                    <h5 className="section-header info-color white-text text-center py-4">
+                        <strong>Post your Immutable Article</strong><br />
+                        <small>Cost per post: {thefee} ETH</small>
+                    </h5>
+                </div>
+                <div className="container formsubmitpost">
+                    <p>To publish a post, please connect your wallet using the button below</p>
+                    <button className="btn btn-primary" onClick={gotowallet}>Connect Wallet</button>
+                </div>
+            </div>   
     );
 }

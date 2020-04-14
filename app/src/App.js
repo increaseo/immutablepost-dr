@@ -16,13 +16,13 @@ const { DrizzleProvider } = drizzleReactHooks;
 
 function App () {
     return (
-      <DrizzleWelcome>
+      // <DrizzleWelcome>
       <DrizzleProvider drizzle={drizzle}>
         <DrizzleLoader>
           <DappComponent />
         </DrizzleLoader>
       </DrizzleProvider>
-     </DrizzleWelcome> 
+      // </DrizzleWelcome>
     );
   }
 

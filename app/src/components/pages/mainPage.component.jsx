@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { drizzleReactHooks } from "@drizzle/react-plugin";
 import immutablePostLoading from '../../assets/loading.gif';
-import Web3 from "web3";
-import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import Fortmatic from 'fortmatic';
 
 const { useDrizzle, useDrizzleState } = drizzleReactHooks;
 
@@ -17,51 +13,12 @@ export default function MainPage() {
     const [nbposts, setnbposts] = useState(0);
     const [posturl, setPosturl] = useState([]);
     const [showLoading, setshowLoading] = useState(true);
-    const [web3, setWeb3] = useState();
+    
     const state = useDrizzleState(state => state);
     const drizzleStatus = useDrizzleState(state => state.drizzleStatus);
    
-    const providerOptions = {
-        // walletconnect: {
-        //     package: WalletConnectProvider, // required
-        //     options: {
-        //         infuraId: "159beab8ddc94e4fadf540f13abca684" // required
-        //     }
-        // },
-        fortmatic: {
-            package: Fortmatic, // required
-            options: {
-                key: "pk_test_BA2F29C8A4846EA4" // required
-            }
-        }
-    };
-    const web3Modal = new Web3Modal({
-        network: "ropsten", // optional
-        cacheProvider: false, // optional
-        providerOptions // required
-    });
-
-    async function loadConnector() {
-        //web3Modal.clearCachedProvider();
-        const provider = await web3Modal.connect();
-        if (provider) {
-            console.log(drizzleStatus.initialized);
-            setWeb3(new Web3(provider))
-        }
-       
-        
-    }    
+    
    
-
-    async function getBalance() {
-       
-        
-        const balance = await drizzle.web3.eth.getBalance(state.accounts[0]);
-        const baleth = drizzle.web3.utils.fromWei(balance,'ether');
-        setBalance(baleth);
-     
-    }
- 
 
     async function getNbPost() {
         const nbposts = await drizzle.contracts.ImmutablePosts.methods.getNbArticles().call();
@@ -76,9 +33,7 @@ export default function MainPage() {
         window.location.href = "/submit-your-post";
     }
    
-    const gotowallet =(e) => {
-        loadConnector();
-    }
+   
     async function getAllPost() {
 
         try {
@@ -116,16 +71,13 @@ export default function MainPage() {
     
 
     useEffect(() => {    
-        //if (drizzleStatus.initialized !== false) {
-    
-        getBalance();
         getNbPost();
         getAllPost();
-        //}
+       
         
     }, []);
 
-    return balance ? (
+    return nbposts ? (
        <div className="front">
         <div className="front-landing-intro">
                 <div className="container content-frontintro">
@@ -169,7 +121,7 @@ export default function MainPage() {
                 </div>
                 <div className="container list-posts">
 
-                    <button className="btn btn-primary" onClick={gotowallet}>Connect your wallet</button>
+                    
                 </div>
              </div>   
     );

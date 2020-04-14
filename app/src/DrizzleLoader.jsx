@@ -23,11 +23,10 @@ function LoadingContainer({ children }) {
        
     
     const drizzleStatus = useDrizzleState(state => state.drizzleStatus);
+    console.log(drizzleStatus);
     if (drizzleStatus.initialized === false) {
         return (
-            // <>
-            //     {children}
-            // </>
+           
             <main className="drizzle-loader-container">
                 {/* <button className="btn btn-primary" onClick={gotowallet}>Connect your wallet</button>*/} 
              <img src={immutablePostLoading} alt="Drizzle Logo" style={{ height: '100px' }} />

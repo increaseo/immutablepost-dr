@@ -38,11 +38,11 @@ const options = {
   //  block: false,
   //  customProvider: new Web3(window.ethereum)
   // },
+  
   web3: {
-    block: true,
     fallback: {
       type: 'ws',
-      url: "wss://mainnet.infura.io/ws"
+      url: "wss://ropsten.infura.io/ws/v3/159beab8ddc94e4fadf540f13abca684"
     }
   },
   contracts: [ImmutablePosts],

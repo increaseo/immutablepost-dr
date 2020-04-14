@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { drizzleReactHooks } from "@drizzle/react-plugin"
 import { NavLink } from 'react-router-dom'
 import immutablePostLogo from '../../assets/logo-immutableposts@2x.png'
+import Web3 from "web3";
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import Fortmatic from 'fortmatic';
-const fm = new Fortmatic('pk_test_BA2F29C8A4846EA4', 'ropsten');
 
 const { useDrizzle, useDrizzleState } = drizzleReactHooks;
 
@@ -18,10 +20,54 @@ const Navbar = () => {
    
     const [balance, setBalance] = useState();
     const [accountinfo, setAccountinfo] = useState();
+
+    const [web3provider, setWeb3] = useState();
     const state = useDrizzleState(state => state);
     const drizzleStatus = useDrizzleState(state => state.drizzleStatus);
 
+    const providerOptions = {
+        walletconnect: {
+            package: WalletConnectProvider, // required
+            options: {
+                infuraId: "159beab8ddc94e4fadf540f13abca684" // required
+            }
+        },
+        fortmatic: {
+            package: Fortmatic, // required
+            options: {
+                key: "pk_test_BA2F29C8A4846EA4" // required
+            }
+        }
+    };
+    const web3Modal = new Web3Modal({
+        network: "ropsten", // optional
+        cacheProvider: true, // optional
+        providerOptions // required
+    });
 
+    async function loadConnector() {
+        //web3Modal.clearCachedProvider();
+        const provider = await web3Modal.connect();
+        if (provider) {
+            setWeb3(new Web3(provider))
+            getBalance();
+            getUser();
+        }
+
+    }   
+    const gotowallet = (e) => {
+        loadConnector();
+    } 
+    async function checkProvider() {
+        //web3Modal.clearCachedProvider();
+        if (web3Modal.cachedProvider) {
+            const provider = await web3Modal.connect();
+            console.log(provider);
+            setWeb3(new Web3(provider))
+            getBalance();
+            getUser();
+        }
+    }
         async function getBalance() {
             //let isUserLoggedIn = await fm.user.isLoggedIn();
            
@@ -39,15 +85,11 @@ const Navbar = () => {
         }
    
     useEffect(() => {
-        console.log(drizzleStatus.initialized);
-       //if (drizzleStatus.initialized !== false) {
-         getBalance();
-         getUser();
-       // }
+        checkProvider()
 
     }, []);
 
-    return balance ? (
+    return web3provider ? (
         <div>
             <div className="container">
                 <div className="toptestnav">
@@ -107,12 +149,10 @@ const Navbar = () => {
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to="/about">About</NavLink>
                                 </li>
-                                <li className="nav-item">
-                                    <NavLink className="nav-link" to="/contact">Contact</NavLink>
-                                </li>
+                              
                             </ul>
                         </div>
-                        <div className="ethamount">No Wallet connected.</div>
+                        <div className="ethamount"><button className="btn btn-primary" onClick={gotowallet}>Connect Wallet</button></div>
                     </div>
                 </nav>
             </div>  
