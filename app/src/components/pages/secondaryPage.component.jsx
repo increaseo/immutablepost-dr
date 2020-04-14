@@ -163,8 +163,10 @@ export default function SecondaryPage() {
         stateApp['storedCompemail'] = storedCompemail;
         const storedCompcountry = document.getElementById("storedCompcountry").value;
         stateApp['storedCompcountry'] = storedCompcountry;
-
-        
+       
+        //getting nbpost to generate id
+        const nbposts = await drizzle.contracts.ImmutablePosts.methods.getNbArticles().call();
+        var j = nbposts;
     
         //TESTING VALUE
         if (stateApp['storedTitle'] == "" || stateApp['storedDescription'] == "" || stateApp['storedName'] == "" || stateApp['storedBio'] == "" || stateApp['storedCompname'] == "" || stateApp['storedCompaddress'] == "" || stateApp['storedCompcontactname'] == "" || stateApp['storedCompphone'] == "" || stateApp['storedCompemail'] == "") {
@@ -211,6 +213,13 @@ export default function SecondaryPage() {
             var pricenogst = 0.0872 * 0.909090909090909;
             var gst = 0.0872 - pricenogst;
             const currDate = date;
+
+            //Get the link posted
+            var strcat = stateApp['storedCategory'];
+            strcat = strcat.replace(/\s+/g, '-').toLowerCase();
+            var strtitle = stateApp['storedTitle'];
+            strtitle = strtitle.replace(/\s+/g, '-').toLowerCase();
+            var url = encodeURI("https://immutablepost.com/post/" + strcat + "/" + strtitle + "/" + j);
     
             var templateParams = {
                 company_name: stateApp['storedCompname'],
@@ -223,7 +232,8 @@ export default function SecondaryPage() {
                 date: currDate,
                 feenogst: pricenogst.toFixed(4),
                 gstcal: gst.toFixed(4),
-                invoicenb: invoicenumberdate
+                invoicenb: invoicenumberdate,
+                posturl: url
             };
 
             if (stateApp['storedCompcountry'] == 'AUS') {
@@ -313,7 +323,7 @@ export default function SecondaryPage() {
             <div className="front-landing-intro page">
                 <h5 className="section-header info-color white-text text-center py-4">
                     <strong>Post your Immutable Article</strong><br />
-                    <small>Cost of the post: {thefee} ETH</small>
+                    <small>Cost per post: {thefee} ETH</small>
                 </h5>
             </div>
            

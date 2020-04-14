@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { drizzleReactHooks } from "@drizzle/react-plugin"
 
-const { useDrizzle } = drizzleReactHooks;
+export default function PrivacyPage() {
 
-export default function contactPage() {
+    useEffect(() => {
+        window.scrollTo(0, 0)
 
+    }, []);
     
 
     return (

@@ -1,9 +1,11 @@
 import React from "react";
+import Web3 from "web3";
 import { drizzleReactHooks } from "@drizzle/react-plugin";
 import Lottie from 'react-lottie'
 import animationData from './assets/drizzleLogo.json'
 import immutablePostLoading from './assets/loading.gif'
-const { useDrizzleState } = drizzleReactHooks; 
+
+const { useDrizzleState } = drizzleReactHooks;
 
 const defaultOptions = {
     loop: true,
@@ -15,20 +17,28 @@ const defaultOptions = {
     }
 };
 
-function LoadingContainer({children}) {
+
+
+function LoadingContainer({ children }) {
+       
+    
     const drizzleStatus = useDrizzleState(state => state.drizzleStatus);
-    if(drizzleStatus.initialized === false) {
+    if (drizzleStatus.initialized === false) {
         return (
+            // <>
+            //     {children}
+            // </>
             <main className="drizzle-loader-container">
-                <img src={immutablePostLoading} alt="Drizzle Logo" style={{ height: '100px' }} />
-                <div className="drizzle-loader-text">Loading...</div>
+                {/* <button className="btn btn-primary" onClick={gotowallet}>Connect your wallet</button>*/} 
+             <img src={immutablePostLoading} alt="Drizzle Logo" style={{ height: '100px' }} />
+                <div className="drizzle-loader-text">Loader Loading...</div> 
+
             </main>
         )
-    } return(
+    } return (
         <>
-            { children }
+            {children}
         </>
     );
 }
-
 export default LoadingContainer;

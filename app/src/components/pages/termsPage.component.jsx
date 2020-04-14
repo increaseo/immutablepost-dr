@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { drizzleReactHooks } from "@drizzle/react-plugin"
 
-const { useDrizzle } = drizzleReactHooks;
 
-export default function contactPage() {
+export default function TermsPage() {
 
-    
+    useEffect(() => {
+        window.scrollTo(0, 0)
+
+    }, []);
+
 
     return (
         <div>
@@ -16,7 +19,7 @@ export default function contactPage() {
             </div>
             <div className="container section">
                 <p>This website (<strong>Site</strong>) is operated by Increaseo 69 385 922 934 (<strong>we</strong>, <strong>our</strong> or <strong>us</strong>). It is available at: immutablepost.com and may be available through other addresses or channels.</p>
-                <p><strong>Consent:</strong> By accessing and/or using our Site, you agree to these terms of use and our <a href="https://www.immutablepost.com/privacy-policy/">Privacy Policy</a> (available on our Site) (<strong>Terms</strong>). Please read these Terms carefully and immediately cease using our Site if you do not agree to them.</p>
+                <p><strong>Consent:</strong> By accessing and/or using our Site, you agree to these terms of use and our <a href="https://www.immutablepost.com/privacy">Privacy Policy</a> (available on our Site) (<strong>Terms</strong>). Please read these Terms carefully and immediately cease using our Site if you do not agree to them.</p>
                 <p><strong>Variations:</strong> We may, at any time and at our discretion, vary these Terms by publishing the varied terms on our Site. We recommend you check our Site regularly to ensure you are aware of our current terms. Materials and information on this Site (<strong>Content</strong>) are subject to change without notice. We do not undertake to keep our Site up-to-date and we are not liable if any Content is inaccurate or out-of-date.</p>
                 <p><strong>Licence to use our Site:</strong> We grant you a non - exclusive, royalty - free, revocable, worldwide, non - transferable licence to use our Site in accordance with these Terms.All other uses are prohibited without our prior written consent.</p>
                  <p><strong>Prohibited conduct:</strong> You must not do or attempt to do anything: that is unlawful; prohibited by any laws applicable to our Site; which we would consider inappropriate; or which might bring us or our Site into disrepute, including(without limitation):</p>

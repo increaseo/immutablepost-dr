@@ -80,7 +80,7 @@ h1, h2, h3, h4 {
   color: #343434;
 }
 .ethamount {
-  margin-top: 30px;
+  margin-top: 25px;
 }
 .front-landing-intro {
    background-image: url('assets/background.jpeg');
@@ -220,4 +220,14 @@ label span, .errortext {
 .form-control-select {
   width:100%;
   display: block;
+}
+.toptestnav {
+  border:2px solid #6FA342;
+}
+.toptestnav p {
+  margin-bottom: 0rem;
+}
+.footericon {
+  width: 18px;
+  margin-right: 11px;
 }
