@@ -45,6 +45,7 @@ const options = {
       url: "wss://ropsten.infura.io/ws/v3/159beab8ddc94e4fadf540f13abca684"
     }
   },
+  syncAlways:true,
   contracts: [ImmutablePosts],
   events: {
     ImmutablePost: ["newPost"],

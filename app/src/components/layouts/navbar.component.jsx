@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { drizzleReactHooks } from "@drizzle/react-plugin"
 import { NavLink } from 'react-router-dom'
 import immutablePostLogo from '../../assets/logo-immutableposts@2x.png'
+import fs from "fs";
 import Web3 from "web3";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Fortmatic from 'fortmatic';
+import Squarelink from "squarelink";
 
 const { useDrizzle, useDrizzleState } = drizzleReactHooks;
 
@@ -37,21 +39,33 @@ const Navbar = () => {
             options: {
                 key: "pk_test_BA2F29C8A4846EA4" // required
             }
+        },
+        squarelink: {
+            package: Squarelink, // required
+            options: {
+                id: "f9505d15054e8406cd5c" // required
+            }
         }
     };
     const web3Modal = new Web3Modal({
         network: "ropsten", // optional
-        cacheProvider: true, // optional
+        cacheProvider: false, // optional
         providerOptions // required
     });
 
     async function loadConnector() {
-        //web3Modal.clearCachedProvider();
+        web3Modal.clearCachedProvider();
         const provider = await web3Modal.connect();
         if (provider) {
             setWeb3(new Web3(provider))
-            getBalance();
-            getUser();
+            const web3 = new Web3(provider);
+            console.log(provider);
+            //alert(web3.currentProvider.host);
+            //const balance = Web3.eth.getBalance(state.accounts[0]);
+            //const baleth = Web3.utils.fromWei(balance, 'ether');
+            //var tokenBalance = parseFloat(baleth);
+            //tokenBalance = tokenBalance.toFixed(5);
+            //setBalance(baleth);
         }
 
     }   
@@ -59,13 +73,12 @@ const Navbar = () => {
         loadConnector();
     } 
     async function checkProvider() {
-        //web3Modal.clearCachedProvider();
+        web3Modal.clearCachedProvider();
         if (web3Modal.cachedProvider) {
             const provider = await web3Modal.connect();
             console.log(provider);
             setWeb3(new Web3(provider))
-            getBalance();
-            getUser();
+            const web3js = new Web3(provider);
         }
     }
         async function getBalance() {
@@ -73,9 +86,9 @@ const Navbar = () => {
            
            const balance = await drizzle.web3.eth.getBalance(state.accounts[0]);
             const baleth = drizzle.web3.utils.fromWei(balance, 'ether');
-            var tokenBalance = parseFloat(baleth);
-            tokenBalance = tokenBalance.toFixed(5);
-            setBalance(tokenBalance);
+            //var tokenBalance = parseFloat(baleth);
+            //tokenBalance = tokenBalance.toFixed(5);
+            setBalance(baleth);
            
         }
         async function getUser() {
@@ -86,6 +99,10 @@ const Navbar = () => {
    
     useEffect(() => {
         checkProvider()
+        if (web3provider) {
+            getBalance();
+            getUser();
+        }
 
     }, []);
 
