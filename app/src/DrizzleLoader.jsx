@@ -30,7 +30,7 @@ function LoadingContainer({ children }) {
             <main className="drizzle-loader-container">
                 {/* <button className="btn btn-primary" onClick={gotowallet}>Connect your wallet</button>*/} 
              <img src={immutablePostLoading} alt="Drizzle Logo" style={{ height: '100px' }} />
-                <div className="drizzle-loader-text">Loader Loading...</div> 
+                <div className="drizzle-loader-text">Loading...</div> 
 
             </main>
         )

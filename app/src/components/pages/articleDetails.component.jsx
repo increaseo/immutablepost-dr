@@ -25,12 +25,6 @@ export default function ArticleDetails(props) {
     var theurl = document.location + '';
    
 
-    async function getBalance() {
-        const balance = await drizzle.web3.eth.getBalance(state.accounts[0]);
-        const baleth = drizzle.web3.utils.fromWei(balance,'ether');
-        setBalance(baleth);
-    }
-
     async function getPostDetails() {
         const theid = props.match.params.id;
         const arraypostdetail= [];
@@ -44,11 +38,11 @@ export default function ArticleDetails(props) {
     }
 
     useEffect(() => {    
-        getBalance();
+        //getBalance();
         getPostDetails();
     }, []);
 
-    return balance ? (
+    return postdetail ? (
         <div>
             <div className="front-landing-intro page">
                 <h5 className="section-header info-color white-text text-center py-4">
@@ -59,7 +53,7 @@ export default function ArticleDetails(props) {
             </div>
               
             <div className="container section">
-                <div className="catgory-title"><small>In</small>
+                <div className="catgory-title"><small>In </small>
                 {postdetail.map(result => (
                     <small key={props.match.params.id}>{result.category} From {result.authorname}</small>
                 ))}

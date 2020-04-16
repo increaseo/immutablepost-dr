@@ -15,6 +15,7 @@ const { DrizzleProvider } = drizzleReactHooks;
 
 
 function App () {
+  console.log('drizzle_options', drizzleOptions);
     return (
       // <DrizzleWelcome>
       <DrizzleProvider drizzle={drizzle}>
