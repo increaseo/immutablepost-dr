@@ -237,3 +237,26 @@ label span, .errortext {
 .toplogo {
   margin-top: 20px;;
 }
+.inlineblock {
+  display:inline-block;
+}
+#menucollapse {
+    width: 100%;
+}
+.hiddenmenu {
+  display: block;
+}
+@media screen and (max-width: 992px) {
+  /* #menucollapse {
+   display: none;
+  }  */
+  .hiddenmenu {
+  display: none;
+}
+  .navbar-nav {
+    margin-left: 0px !important;
+  }
+  .navbar-brand img {
+    height: 32px !important;
+  }
+}

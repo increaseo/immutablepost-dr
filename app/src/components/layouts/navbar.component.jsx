@@ -27,7 +27,7 @@ const Navbar = () => {
     const state = useDrizzleState(state => state);
     const drizzleStatus = useDrizzleState(state => state.drizzleStatus);
     const [showModal, setModal] = useState(false);
-
+    const [showMenu, setShowMenu] = useState(false);
     const handleClose = () => setModal(false);
     const handleShow = () => setModal(true);
     // const providerOptions = {
@@ -139,6 +139,9 @@ const Navbar = () => {
            window.open('https://metamask.io/', '_blank');
            //window.location.href = "https://metamask.io/";
         } 
+        const toggleMenu =(e) => {
+            setShowMenu(!showMenu);
+        }
     useEffect(() => {
         checkMetamask();
         //checkProvider()
@@ -160,11 +163,11 @@ const Navbar = () => {
         <nav className="navbar drizzle-navbar navbar-expand-lg navbar-light">
             <div className="container">
                <a className="navbar-brand" href="/"><img src={immutablePostLogo} alt="Drizzle Logo" style={{height: '40px'}} /></a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" onClick={toggleMenu} data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div id="menucollapse" className={showMenu ? '' : 'hiddenmenu'}>
+                    <div className="navbar-collapse inlineblock" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/">Home</NavLink>
@@ -180,6 +183,7 @@ const Navbar = () => {
                         </li> */}
                     </ul>
                 </div>
+                    </div>
                 <div className="ethamount">Wallet amount <strong>{balance} ETH</strong>.</div>
             </div>
             </nav>
