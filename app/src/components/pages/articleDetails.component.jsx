@@ -60,7 +60,12 @@ export default function ArticleDetails(props) {
                 </div>
                 <div className="article-details">
                     {postdetail.map(result => (
-                            <div key={props.match.params.id}><div className="imagepost"><img src={result.image}/></div><div dangerouslySetInnerHTML={{__html: result.description}}></div></div>
+                            <div key={props.match.params.id}>
+                                 {result.image != "https://ipfs.io/ipfs/" &&
+                                <div className="imagepost"><img src={result.image}/></div>
+                                }
+                                <div dangerouslySetInnerHTML={{__html: result.description}}></div>
+                            </div>
                         ))}
                 </div>
             </div>

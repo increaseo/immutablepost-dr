@@ -93,7 +93,21 @@ export default function MainPage() {
                 <div className="listofposts">
                     <ul>
                         {posturl.map(result => (
-                            <li key={result.id}><div className="postcontent"><div className="contentposttext"><h2><a href={result.purl}>{result.title}</a></h2><small>({result.category})</small><p>{result.description}</p><div className="linkarticle"><a href={result.purl} className="linkmore">Read more</a></div></div><div className="imagepost"><img src={result.image} /></div></div></li>
+                            <li key={result.id}>
+                                <div className="postcontent">
+                                    <div className="contentposttext">
+                                        <h2><a href={result.purl}>{result.title}</a></h2>
+                                        <small>({result.category})</small>
+                                        <p><div dangerouslySetInnerHTML={{ __html: result.description }}></div></p>
+                                        <div className="linkarticle">
+                                            <a href={result.purl} className="linkmore">Read more</a>
+                                        </div>
+                                    </div>
+                                    {result.image !="https://ipfs.io/ipfs/" &&
+                                    <div className="imagepost"><img src={result.image} /></div>
+                                    }
+                                </div>
+                          </li>
                         ))}
                     </ul>
                     <div id="loaderpost" className={showLoading ? "" : "hidden"}>
