@@ -60,7 +60,7 @@ export default function MainPage() {
             }
             console.log(arrayallpostlist);
             // console.log(stateApp.list);
-            setPosturl(arrayallpostlist);
+            setPosturl(arrayallpostlist.reverse());
             setshowLoading(!showLoading);
         } catch (error) {
             console.error("Could not connect to contract or chain.");
