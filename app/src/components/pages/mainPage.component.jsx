@@ -48,7 +48,7 @@ export default function MainPage() {
                 strtitle = strtitle.replace(/\s+/g, '-').toLowerCase();
                 var url = encodeURI("post/"+strcat+"/"+strtitle+"/"+j);
                 var postauthor = postdata.authorpost;
-                var excerpt = postdata.description.substr(0, 250);
+                var excerpt = postdata.description.substr(0, 250)+'...';
                 //console.log(postauthor);
                 var postauthorid = await drizzle.contracts.ImmutablePosts.methods.getAuthorbyAccount(postauthor).call();
             // console.log(postauthorid);

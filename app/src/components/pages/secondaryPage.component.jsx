@@ -9,10 +9,10 @@ import ipfs from "../../ipfs.js"
 import Swal from 'sweetalert2'
 
 
-import Web3 from "web3";
-import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import Fortmatic from 'fortmatic';
+// import Web3 from "web3";
+// import Web3Modal from "web3modal";
+// import WalletConnectProvider from "@walletconnect/web3-provider";
+// import Fortmatic from 'fortmatic';
 
 const { useDrizzle, useDrizzleState } = drizzleReactHooks;
 
